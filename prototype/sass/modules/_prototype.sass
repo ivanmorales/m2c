@@ -1,0 +1,65 @@
+$yellow: 	#f1c40f
+$blue: 		#3498db
+$gray: 		#95a5a6
+$green: 	#27ae60
+$red: 		#c0392b
+$orange: 	#e67e22
+$light-gray: 	#ecf0f1
+$purple: 	#8e44ad
+
+$sm: 30%
+$md: 25%
+$lg: 28%
+
+$lighten: 25
+$height-ratio: 1.3
+
+@mixin petal-position($width, $height: $width)
+	width: $width
+	height: $height
+	margin-left: -$width / 2
+	margin-top: -$height / 2
+
+@mixin petal($color, $top, $left, $width, $height: $width)
+	+petal-position($width, $height)
+
+	background-color: $color
+	top: 50 + ($top * ($height / 2))
+	left: 50 + ($left * ($width / 2))
+
+.m2c-flower
+	width: 500px
+	height: 500px
+	background: $light-gray
+	position: relative
+
+	.petal
+		+border-radius(20px)
+		position: absolute
+
+	.petal-1
+		+petal($yellow, 0, 0, $sm)
+
+	.petal-1-2
+		+petal($gray, 0, 0, $sm * $height-ratio)
+
+	.petal-2
+		+petal($red, 1, 1, $md)
+
+		&.petal-lg
+			+petal(lighten($red, $lighten), 1, 1, $lg, $lg * $height-ratio)
+	.petal-3
+		+petal($blue, -1, 1, $md)
+
+		&.petal-lg
+			+petal(lighten($blue, $lighten), -1, 1, $lg, $lg * $height-ratio)
+	.petal-4
+		+petal($orange, -1, -1, $md)
+
+		&.petal-lg
+			+petal(lighten($orange, $lighten), -1, -1, $lg, $lg * $height-ratio)
+	.petal-5
+		+petal($purple, 1, -1, $md)
+
+		&.petal-lg
+			+petal(lighten($purple, $lighten), 1, -1, $lg, $lg * $height-ratio)
